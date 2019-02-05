@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quest to Go to Work!</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div id="app">
+    {{ message }}
+    <br>
+    <button v-if=wakeup_seen v-on:click="wakeup">Wake up!</button>
+    <button v-if=getup_seen v-on:click="getup">Get up?</button>
+    <button v-if=snooze_seen v-on:click="snooze">Snooze?</button>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: "This is a text-based adventure where YOU not only attempt to get to work, but attempt to get there on time. Your workday starts at 8:00 AM.  Good luck!",
+        wakeup_seen: true,
+        getup_seen: false,
+        snooze_seen: false
+      },
+      methods: {
+        wakeup() {
+          this.message = "You hear a loud noise from your right.  This can't be from the dream!  You slowly open your eyes, staring at the ceiling.  That loud ringing noise sure is annoying!  You roll over to your right and check your cell phone... 7:00 AM.  I need this sleep so bad right now!  Hitting the snooze button for 10 more minutes won't hurt anything, right?  What will you do?";
+          this.wakeup_seen = false;
+          this.getup_seen = true;
+          this.snooze_seen = true;
+        },
+        getup() {
+          this.message = "TO BE CONTINUED!"
+        },
+        snooze() {
+          this.message = "TO BE CONTINUED!"
+        }
+      }
+    })
+  </script>
+</body>
+</html>
