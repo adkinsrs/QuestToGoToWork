@@ -6,7 +6,7 @@
 </head>
 <body>
   <div id="app">
-      <!--{{ current_time }}-->
+    {{ mins_left }}
     {{ message }}
     <br>
     <button v-if=wakeup_seen v-on:click="wakeup">Wake up!</button>
@@ -21,7 +21,7 @@
     var app = new Vue({
       el: '#app',
       data: {
-        //current_time: 
+        mins_left: "---"
         message: "This is a text-based adventure where YOU not only attempt to get to work, but attempt to get there on time. Your workday starts at 8:00 AM.  Good luck!",
         wakeup_seen: true,
         getup_seen: false,
@@ -33,29 +33,44 @@
       methods: {
         wakeup() {
           this.message = "You hear a loud noise from your right.  This can't be from the dream!  You slowly open your eyes, staring at the ceiling.  That loud ringing noise sure is annoying!  You roll over to your right and check your cell phone... 7:00 AM.  You need this sleep so bad right now!  Hitting the 'SNOOZE' button for 10 more minutes won't hurt anything, right?  What will you do?";
+          this.mins_left = 60;
           this.wakeup_seen = false;
           this.getup_seen = true;
           this.snooze_seen = true;
         },
         getup() {
           this.message = "You turn the alarm off.  After rubbing your eyes and getting out of bed, you let out a loud yawn and stretch like you are trying to touch all four walls in your bedroom as well as your ceiling.  You make your way to the kitchen.... what to eat for breakfast... You could eat some cereal, or cook up some bacon and eggs.  Heck, it may be worth just skipping breakfast altogether... that could save you some valuable time.  What's the plan?",
-          this.getup_seen = false,
-          this.snooze_seen = false,
-          this.cereal_seen = true,
-          this.eggs_seen = true,
+          this.mins_left = 60;
+          this.getup_seen = false;
+          this.snooze_seen = false;
+          this.cereal_seen = true;
+          this.eggs_seen = true;
           this.skip_breakfast_seen = true
         },
         snooze() {
           this.message = "You hit the 'SNOOZE' button on your cell phone.  Ah, the peaceful sanctuary of Dreamland!..... 10 minutes later... BEEP, BEEP, BEEP!  Darn, that stupid alarm is ruining another perfectly good dream!  It was getting to the good part too.  But you have to get up eventually.  Maybe one more snooze won't hurt."
+          this.mins_left = this.mins_left - 10;
         },
         cereal() {
-          this.message = "TO BE CONTINUED"
+          this.message = "You poured yourself a bowl of Raisin Bran.  Gotta get that fiber and all that.  You open the fridge to grab some milk, and shoot!  Looks like you forgot to buy some in your last grocery run.  But you hate dry cereal so much!  You could just go ahead and eat it dry, or just skip breakfast entirely.  Your choice?"
+          this.mins_left = this.mins_left - 1;
+          this.cereal_seen = false;
+          this.eat_dry_seen = true;
         },
         eggs() {
-          this.message = "TO BE CONTINUED"
+          this.message = "It's eggs and bacon today!  To save some time you just cook the bacon in the microwave 9you monster!), so that you can use your pan for cooking the eggs.  In total it took you about 10 minutes to cook your breakfast and another five minutes to eat it.  Time to get dressed."
+          this.mins_left = this.mins_left - 15;
+          this.cereal_seen = false;
+          this.eggs_seen = false;
+          this.skip_breakfast_seen = false;
+          this.clothes_seen = true;
         },
         skip_breakfast() {
-          this.message = "TO BE CONTINUED"
+          this.message = "You decided to skip breakfast.  You can get about your day quicker, plus you can stand to lose a few pounds.  Time to get dressed."
+          this.cereal_seen = false;
+          this.eggs_seen = false;
+          this.skip_breakfast_seen = false;
+          this.clothes_seen = true;
         }
       }
     })
