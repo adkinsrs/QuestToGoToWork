@@ -15,6 +15,7 @@
     <button v-if=cereal_seen v-on:click="cereal">Eat a bowl of cereal</button>
     <button v-if=eggs_seen v-on:click="eggs">Whip up some eggs and bacon</button>
     <button v-if=no_breakfast_seen v-on:click="cereal">Just skip breakfast</button>
+    <button v-if=clothes_seen v-on:click="clothes">Get dressed</button>
   </div>
 
   <script>
@@ -39,7 +40,7 @@
           this.snooze_seen = true;
         },
         getup() {
-          this.message = "You turn the alarm off.  After rubbing your eyes and getting out of bed, you let out a loud yawn and stretch like you are trying to touch all four walls in your bedroom as well as your ceiling.  You make your way to the kitchen.... what to eat for breakfast... You could eat some cereal, or cook up some bacon and eggs.  Heck, it may be worth just skipping breakfast altogether... that could save you some valuable time.  What's the plan?",
+          this.message = "You turn the alarm off.  After rubbing your eyes and getting out of bed, you let out a loud yawn and stretch like you are trying to touch all four walls in your bedroom as well as your ceiling.  You make your way to the kitchen.... what to eat for breakfast... You could eat some cereal, or cook up some bacon and eggs.  Heck, it may be worth just skipping breakfast altogether... that could save you some valuable time.  What's the plan?";
           this.mins_left = 60;
           this.getup_seen = false;
           this.snooze_seen = false;
@@ -48,17 +49,17 @@
           this.skip_breakfast_seen = true
         },
         snooze() {
-          this.message = "You hit the 'SNOOZE' button on your cell phone.  Ah, the peaceful sanctuary of Dreamland!..... 10 minutes later... BEEP, BEEP, BEEP!  Darn, that stupid alarm is ruining another perfectly good dream!  It was getting to the good part too.  But you have to get up eventually.  Maybe one more snooze won't hurt."
+          this.message = "You hit the 'SNOOZE' button on your cell phone.  Ah, the peaceful sanctuary of Dreamland!..... 10 minutes later... BEEP, BEEP, BEEP!  Darn, that stupid alarm is ruining another perfectly good dream!  It was getting to the good part too.  But you have to get up eventually.  Maybe one more snooze won't hurt.";
           this.mins_left = this.mins_left - 10;
         },
         cereal() {
-          this.message = "You poured yourself a bowl of Raisin Bran.  Gotta get that fiber and all that.  You open the fridge to grab some milk, and shoot!  Looks like you forgot to buy some in your last grocery run.  But you hate dry cereal so much!  You could just go ahead and eat it dry, or just skip breakfast entirely.  Your choice?"
+          this.message = "You poured yourself a bowl of Raisin Bran.  Gotta get that fiber and all that.  You open the fridge to grab some milk, and shoot!  Looks like you forgot to buy some in your last grocery run.  But you hate dry cereal so much!  You could just go ahead and eat it dry, or just skip breakfast entirely.  Your choice?";
           this.mins_left = this.mins_left - 1;
           this.cereal_seen = false;
           this.eat_dry_seen = true;
         },
         eggs() {
-          this.message = "It's eggs and bacon today!  To save some time you just cook the bacon in the microwave 9you monster!), so that you can use your pan for cooking the eggs.  In total it took you about 10 minutes to cook your breakfast and another five minutes to eat it.  Time to get dressed."
+          this.message = "It's eggs and bacon today!  To save some time you just cook the bacon in the microwave 9you monster!), so that you can use your pan for cooking the eggs.  In total it took you about 10 minutes to cook your breakfast and another five minutes to eat it.  Time to get dressed.";
           this.mins_left = this.mins_left - 15;
           this.cereal_seen = false;
           this.eggs_seen = false;
@@ -66,11 +67,17 @@
           this.clothes_seen = true;
         },
         skip_breakfast() {
-          this.message = "You decided to skip breakfast.  You can get about your day quicker, plus you can stand to lose a few pounds.  Time to get dressed."
+          this.message = "You decided to skip breakfast.  You can get about your day quicker, plus you can stand to lose a few pounds.  Time to get dressed.";
           this.cereal_seen = false;
           this.eggs_seen = false;
           this.skip_breakfast_seen = false;
           this.clothes_seen = true;
+        },
+        clothes() {
+          this.message = "Fortunately, being the prepared individual that you are, you remembered to neatly lay out your business attire the night before.  There will be no tough decisions this morning!  Slipping on your clothing takes about six minutes total.  Next is the bathroom routine.";
+          this.mins_left = this.mins_left - 6;
+          this.clothes_seen = false;
+          this.bathroom_seen = true;
         }
       }
     })
