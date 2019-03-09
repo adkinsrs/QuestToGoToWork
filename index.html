@@ -14,8 +14,14 @@
     <button v-if=snooze_seen v-on:click="snooze">Snooze?</button>
     <button v-if=cereal_seen v-on:click="cereal">Eat a bowl of cereal</button>
     <button v-if=eggs_seen v-on:click="eggs">Whip up some eggs and bacon</button>
-    <button v-if=no_breakfast_seen v-on:click="cereal">Just skip breakfast</button>
+    <button v-if=skip_breakfast_seen v-on:click="skip_breakfast">Just skip breakfast</button>
+    <button v-if=eat_dry_seen v-on:click="eat_dry">Eat the dry cereal anyways</button>
     <button v-if=clothes_seen v-on:click="clothes">Get dressed</button>
+    <buttom v-if=bathroom_seen v-on:click="bathroom">Do your "bathroom" things</button>
+    <button v-if=leave_seen v-on:click="leave">Time to leave home</button>
+    <button v-if=wait_seen v-on:click="wait">Something feels off...</button>
+    <button v-if=go_left_seen v-on:click="go_left">Go left</button>
+    <button v-if=go_right_seen v-on:click="go_right">Go right</button>
   </div>
 
   <script>
@@ -28,8 +34,19 @@
         getup_seen: false,
         snooze_seen: false,
         cereal_seen: false,
+        eat_dry_seen: false,
         eggs_seen: false,
         skip_breakfast_seen: false,
+        clothes_seen: false,
+        bathroom_seen: false,
+        leave_seen: false,
+        wait_seen: false,
+        go_left_seen: false,
+        go_right_seen: false,
+        
+        // Triggers for different outcomes
+        ate_dry_cereal: false,
+        have_badge: false
       },
       methods: {
         wakeup() {
@@ -41,7 +58,6 @@
         },
         getup() {
           this.message = "You turn the alarm off.  After rubbing your eyes and getting out of bed, you let out a loud yawn and stretch like you are trying to touch all four walls in your bedroom as well as your ceiling.  You make your way to the kitchen.... what to eat for breakfast... You could eat some cereal, or cook up some bacon and eggs.  Heck, it may be worth just skipping breakfast altogether... that could save you some valuable time.  What's the plan?";
-          this.mins_left = 60;
           this.getup_seen = false;
           this.snooze_seen = false;
           this.cereal_seen = true;
@@ -56,10 +72,19 @@
           this.message = "You poured yourself a bowl of Raisin Bran.  Gotta get that fiber and all that.  You open the fridge to grab some milk, and shoot!  Looks like you forgot to buy some in your last grocery run.  But you hate dry cereal so much!  You could just go ahead and eat it dry, or just skip breakfast entirely.  Your choice?";
           this.mins_left = this.mins_left - 1;
           this.cereal_seen = false;
+          this.eggs_seen = false;
           this.eat_dry_seen = true;
         },
+        eat_dry() {
+          this.message = "You decided to go ahead and eat the cereal dry.  This is probably the most depressing thing you ever did.  Oh well!  You try to forget these next 5 minutes, and focus on what you want to wear today.";
+          this.mins_left = this.mins_left - 4;
+          this.eat_dry_seen = false;
+          this.skip_breakfast_seen = false;
+          this.clothes_seen = true;
+          this.ate_dry_cereal = true;
+        },
         eggs() {
-          this.message = "It's eggs and bacon today!  To save some time you just cook the bacon in the microwave 9you monster!), so that you can use your pan for cooking the eggs.  In total it took you about 10 minutes to cook your breakfast and another five minutes to eat it.  Time to get dressed.";
+          this.message = "It's eggs and bacon today!  To save some time you just cook the bacon in the microwave (you monster!), so that you can use your pan for cooking the eggs.  In total it took you about 10 minutes to cook your breakfast and another five minutes to eat it.  Time to get dressed.";
           this.mins_left = this.mins_left - 15;
           this.cereal_seen = false;
           this.eggs_seen = false;
@@ -78,7 +103,27 @@
           this.mins_left = this.mins_left - 6;
           this.clothes_seen = false;
           this.bathroom_seen = true;
-        }
+        },
+        bathroom() {
+          this.message = "Between going to the loo, brushing your teeth, and freshening up, you spend about 10 minutes total in the bothroom.  You're finally ready to head out the door.  But wait, you aren't forgetting anything are you?  You can't be wasting time thinking about these things... it's probably not that important.";
+          this.mins_left = this.mins_left - 10;
+          this.bathroom_seen = false;
+          this.leave_seen = true;
+          this.wait_seen = true;
+        },
+        leave() {
+          this.message = "You step out upon the open world.  Man the city is so big!  Being a city-slicker, you walk to work instead of commute via vehicle.  You feel so smug that you aren't polluting the world with various emissions that those plebes in cars do.  You get so caught up in your smugness that you forget which way you walk to go to work.  Do you go left or do you go right?";
+          this.leave_seen = false;
+          this.wait_seen = false;
+          this.go_left_seen = true;
+          this.go_right_seen = true;
+        },
+        wait() {
+          this.message = "You stand by the front door, feeling like something is off but you cannot put your finger on it.  After a couple of minutes, you exclaim \"A-ha!\"... you left your work badge in your bedroom.  You'd be in a pickle without that badge.  Quickly, you grab the badge and leave the house.";
+          this.mins_left = this.mins_left - 2;
+          this.wait_seen = false;
+          this.have_badge = true;
+        },
       }
     })
   </script>
